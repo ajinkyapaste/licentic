@@ -1,0 +1,25 @@
+pass: 123456
+
+admin:
+        "email": "admin@gmail.com",
+
+company:
+        "email": "company@gmail.com",
+
+distributor:
+        "email": "distributor1@gmail.com",
+        "email": "distributor2@gmail.com",
+        "email": "distributor3@gmail.com",
+        "email": "distributor4@gmail.com",
+
+channel_partner:
+        "email": "channel_partner1@gmail.com",
+        "email": "channel_partner@gmail.com",
+        "email": "channel_partner3@gmail.com",
+        "email": "channel_partner4@gmail.com",
+
+customer:
+        "email": "customer1@gmail.com",
+        "email": "customer2@gmail.com",
+        "email": "customer3@gmail.com",
+        "email": "customer4@gmail.com",

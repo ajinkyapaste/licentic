@@ -1,0 +1,73 @@
+version: '3.9'
+
+services:
+
+  lms-backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: lms-backend 
+    restart: unless-stopped  
+    expose:
+      - "4000"
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - mongo
+    networks:
+      - lms-network
+      - prod-network
+
+  lms-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: lms-frontend
+    restart: unless-stopped
+    expose:
+      - "80"
+    depends_on:
+      - lms-backend
+    networks:
+      - lms-network
+      - prod-network
+
+  lms-website:
+    build:
+      context: ./LMS--website
+      dockerfile: Dockerfile
+    container_name: lms-website
+    restart: unless-stopped
+    expose:
+      - "80"
+    depends_on:
+      - lms-backend
+    networks:
+      - lms-network
+      - prod-network
+
+  mongo:
+    image: mongo:7.0
+    container_name: lms-mongo
+    restart: unless-stopped
+    command:
+      - "--replSet"
+      - "rs0"
+      - "--bind_ip_all"
+    volumes:
+      - /root/mongo-data:/data/db
+    expose:
+      - "27017"
+    networks:
+      - lms-network
+      - prod-network
+
+volumes:
+  mongo-data:
+networks:
+  lms-network:
+    external: true
+  prod-network:
+    external: true
+
+
